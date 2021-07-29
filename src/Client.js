@@ -421,7 +421,11 @@ class Client extends EventEmitter {
         if (this._qrRefreshInterval) {
             clearInterval(this._qrRefreshInterval);
         }
-        await this.pupBrowser.close();
+        if(this.options.puppeteer.browserWSEndpoint){
+			await this.pupPage.close();
+		}else{
+			await this.pupBrowser.close();
+		}
     }
 
     /**
